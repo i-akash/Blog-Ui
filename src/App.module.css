@@ -1,0 +1,11 @@
+.appWindow {
+  background-color: #282c34;
+  
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  font-size: calc(10px + 2vmin);
+  color: #61dafb;
+}
+
