@@ -3,6 +3,7 @@ import React from 'react';
 
 //components
 import Navbar from './components/navigation/navbar/Navbar'
+import StoryForm from './components/forms/stories/StoryForm'
 
 //css
 import styles from './App.module.css';
