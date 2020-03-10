@@ -3,8 +3,7 @@ import React from 'react';
 
 //components
 import Navbar from './components/navigation/navbar/Navbar'
-import StoryForm from './components/forms/stories/StoryForm'
-
+import AppRoute from './components/navigation/route/AppRoute'
 //css
 import styles from './App.module.css';
 
@@ -13,6 +12,7 @@ function App() {
   return (
     <div className={styles.appWindow}>
         <Navbar/>
+        <AppRoute/>
     </div>
   );
 }

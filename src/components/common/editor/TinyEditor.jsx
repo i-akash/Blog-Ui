@@ -2,9 +2,9 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 class TinyEditor extends React.Component {
-  
+
     handleEditorChange = (content, editor) => {
-    console.log('Content was updated:', content);
+      this.props.onContentChange(content)
   }
 
   render() {
@@ -12,17 +12,19 @@ class TinyEditor extends React.Component {
       <Editor
         initialValue="<p>This is the initial content of the editor</p>"
         init={{
+          skin: "oxide-dark",
+          content_css: "dark",
+
           height: 500,
-          menubar: true,
+          menubar: false,
           plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount'
+            'advlist lists link image preview anchor',
+            'visualblocks fullscreen',
+            'insertdatetime media table paste wordcount'
           ],
           toolbar:
-            'undo redo | formatselect | bold italic backcolor code preview table| \
-            alignleft aligncenter alignright alignjustify | \
-            bullist numlist outdent indent | removeformat | help'
+            'undo redo | formatselect | bold italic backcolor preview | alignleft | \
+            bullist indent'
         }}
         onEditorChange={this.handleEditorChange}
       />

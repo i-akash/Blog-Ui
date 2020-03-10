@@ -1,0 +1,38 @@
+.storyContainer{
+    padding: 3rem 2rem 1.5rem 2rem;
+    margin: 10px;
+    border: 1px solid var(--gray-border);
+    border-radius: 3px;
+    box-shadow: 2px 2px 1rem 1px var(--gray-border);
+}
+
+.storyHeader{
+    width: 100%;
+    text-align: center; 
+}
+
+.storyMetaData{
+    color: var(--gray-font-color);
+    display: flex;
+    justify-content: space-between;
+    margin: 4rem 0px 20px 0px;
+}
+
+.storyBoldMetaData{
+    font-weight: bolder;
+    color: rgb(182, 181, 181);
+    letter-spacing: .3px;
+}
+
+.storyBody{
+    color: var(--gray-font-color);
+    margin-bottom: 10px;
+
+    display: -webkit-box;
+   -webkit-box-orient: vertical;
+
+   /* to specify the number of lines you want the text to run through... */
+   -webkit-line-clamp: 3;
+   /* hide the overflowing text, i.e, texts that did not fit in to the box */
+   overflow: hidden;
+}

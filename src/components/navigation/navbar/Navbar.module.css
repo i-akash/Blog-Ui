@@ -1,32 +1,75 @@
-.Navbar{
-    background-color: black;
+.navbar{
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: .1rem;
+    padding-bottom: 0rem;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    box-shadow: 0 -1.5px .5rem .5px var(--navbar-shadow) inset;
+    background-color: var(--navbar-background-color);
+    color: var(--navbar-link-color);
+    z-index: 1000;
+    margin-bottom: 3rem;
+    list-style-type: none;
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+@media only screen and (max-width: 1100px) {
+    .navbar {
+        padding-left: 15vw;
+        padding-right: 15vw;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .navbar {
+        padding-top: .9rem;
+        padding-bottom: .4rem;
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
 }
  
-  
-li {
-float: left;
-}
-  
-li a {
-display: block;
-color: white;
-text-align: center;
-padding: 14px 16px;
-text-decoration: none;
-}
-  
 
-li {
-border-right: 1px solid #bbb;
+
+.listItem {
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
 }
-  
-li:last-child {
-border-right: none;
+
+.listItemActive{
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--navbar-link-active-color);
+    border-bottom: 2px solid var(--navbar-active-border-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.listItem:hover {
+    color: var(--gray-font-color);
+    cursor: pointer;
+}
+
+.listSpan {
+    margin: 5px;
+}
+
+.listItem:active{
+    color: var(--basic-font-color);
+}
+

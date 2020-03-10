@@ -1,11 +1,12 @@
+
 .appWindow {
   background-color: black;
   
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  font-size: 17px;
   color: var( --yellow-green);
 }
 

@@ -1,0 +1,20 @@
+.ui.form{
+    width: 80%;
+}
+
+.ui.form .field input{
+    border:0 !important;
+    border-radius: 0 !important;
+    
+    background-color: black !important;
+    
+    border-bottom: 1px solid #00CB54 !important;
+    color: var(--gray-font-color)  !important;
+}
+
+
+.ui.message {
+    background-color: black !important;
+    color: red !important;
+    border: 1px solid red !important;
+}
