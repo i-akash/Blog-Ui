@@ -8,6 +8,10 @@ const getStoriesAction=data=>({
     payload:data
 })
 
+const deleteStoryAction=(data)=>({
+    type:DELETE_STORY,
+    payload:data
+})
 
 // Asynchronus action
 export const getStoriesPagination=(skip,top)=>dispatch=>storyApi.getStoriesPagination(skip,top)
@@ -18,4 +22,7 @@ export const getStoriesQuery=(query)=>dispatch=>storyApi.getStoriesQuery(query)
 
 export const getStoriesPaginationQuery=(skip,top,query)=>dispatch=>storyApi.getStoriesPaginationQuery(skip,top,query)
                                                                 .then(stories=>dispatch(getStoriesAction(stories)))
+
+export const deleteStory=(storyId)=>dispatch=>storyApi.deleteStory(storyId)
+                                                                .then(()=>dispatch(deleteStoryAction({storyId})))
 

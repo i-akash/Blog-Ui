@@ -17,6 +17,17 @@ export default function StoryPlaceHolder({number}) {
                                     <Placeholder.Line />
                                     <Placeholder.Line />
                                 </Placeholder.Paragraph>
+                                <Placeholder.Paragraph>
+                                    <Placeholder.Line />
+                                    <Placeholder.Line />
+                                    <Placeholder.Line />
+                                </Placeholder.Paragraph>
+                                <Placeholder.Paragraph>
+                                    <Placeholder.Line />
+                                    <Placeholder.Line />
+                                    <Placeholder.Line />
+                                </Placeholder.Paragraph>
+                                
                         </Placeholder>
                 )
             }

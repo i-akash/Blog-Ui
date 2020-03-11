@@ -4,34 +4,57 @@ import Header from '../../common/header/Header'
 import Button from '../../common/buttons/Button'
 import TinyEditor from '../../common/editor/TinyEditor'
 import {Form,Message} from 'semantic-ui-react'
-import {
-    DateInput,
-  } from 'semantic-ui-calendar-react';
-import Styles from './StoryForm.module.css'
+import {DateInput} from 'semantic-ui-calendar-react';
+import pureHtml from '../../../pureIt/PureHtml'
 
-export default class StoryForm extends Component {
+//css
+import Styles from './StoryForm.module.css'
+import Alert from '../../common/alert/Alert'
+
+import {withRouter} from 'react-router-dom'
+
+
+class StoryForm extends Component {
     
     state={
         title:'',
         editorContent:"",
         date:new Date(),
+
+        success:false,
+        formError:{}
+    }
+
+    componentWillReceiveProps=(nextProps)=>{
+        const {story}=nextProps
+        if(!!story===true && story!==this.props.story)
+            this.setState({title:story.title,editorContent:story.body,date:story.publishedDate});
     }
 
     onFieldChange=(event)=>{   
         this.setState({[event.target.name]:event.target.value,formError:{}})
     }
+
     onContentChange=(editorContent)=>this.setState({editorContent})
-    onDateChange=(date)=>this.setState({date})
     
+    onDateChange=(event, {name, value})=>{
+        console.log(value);
+        
+        this.setState({[name]:value})
+    }
+
     onSubmit=(event)=>{
         event.preventDefault();
-        const {title,editorContent,date}=this.state
-        this.props.onAddStory({title,body:editorContent,publishedDate:date});
+        let {title,editorContent,date}=this.state
+        editorContent=pureHtml(editorContent)
+        this.props.onSubmitStory({title,body:editorContent,publishedDate:date})
+                  .then(res=>this.setState({success:true}))
+                  .catch(err=>this.setState({loading:false,formError:err.response.data.errors}));
     }
 
     render() {
-        const {header}=this.props
-        const {date,title,loading,status}=this.state
+        const {header,btnText}=this.props
+        const {date,title,editorContent,loading,success,formError}=this.state
 
         return (
             <div className={Styles.formContainer}>
@@ -39,7 +62,14 @@ export default class StoryForm extends Component {
                     <Header 
                         header={header}
                     />
-                    {!!status && <Message>{status}</Message>}
+
+                   <Alert header={`${header} Confirmation`} 
+                                    text={`${header} Success`} 
+                                    btn1="Home" click1={()=>this.props.history.push("/")} 
+                                    btn2="Continue" click2={()=>this.setState({success:!success})} open={success}/>
+                        
+                        
+                        
                         <Form.Field>
                             <Form.Input
                             required
@@ -47,19 +77,31 @@ export default class StoryForm extends Component {
                             value={title}
                             onChange={this.onFieldChange}
                             placeholder="Title"
+                            error={ !!formError.Title && {
+                                content:formError.Title[0],
+                                pointing: 'below'
+                              }}
                             /> 
                         </Form.Field>
-                        <TinyEditor onContentChange={this.onContentChange}/>
+                        {formError.Body && <Message>{ formError.Body[0]}</Message>}
+                        <TinyEditor onContentChange={this.onContentChange} content={editorContent}/>
                         <DateInput
                             name="date"
                             placeholder="Date"
                             value={date}
                             iconPosition="left"
                             onChange={this.onDateChange}
+                            dateFormat="YYYY-MM-DD"
+                            error={ !!formError.PublishedDate && {
+                                content:formError.PublishedDate[0],
+                                pointing: 'below'
+                              }}
                             />
-                        <Button text="Add" onClick={this.onSubmit}/>
+                        <Button text={btnText}/>
                 </Form>
             </div>
         )
     }
 }
+
+export default withRouter(StoryForm)

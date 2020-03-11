@@ -14,7 +14,6 @@ export default class RegistrationForm extends Component {
         confirmPassword:"",
 
         loading:false,
-        success:false,
         error:false,
         status:"",
         formError:{

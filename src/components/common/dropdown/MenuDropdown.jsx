@@ -23,7 +23,7 @@ export default class MenuDropdown extends React.Component{
                                 
                                     <Dropdown.Item 
                                         key={index}
-                                        onClick={()=>this.onSelect(task.path)}
+                                        onClick={()=>this.onSelect({name:task.name,path:task.path})}
                                     >
                                         {task.name}
                                     </Dropdown.Item>

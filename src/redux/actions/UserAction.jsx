@@ -33,10 +33,6 @@ export const refresh=()=>dispatch=>{
 
     let userId="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid";
     let fullname="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-    console.log(exp);
-    console.log(currentTime);
-    
-    console.log(exp<=currentTime);
     
     if(exp>=currentTime)
         dispatch(refreshAction({userId:decoded[userId],fullName:decoded[fullname]}))

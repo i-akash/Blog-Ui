@@ -16,8 +16,6 @@ class LoginForm extends Component {
         password:"",
      
         loading:false,
-        success:false,
-        error:false,
         status:"",
         formError:{
 
@@ -58,7 +56,7 @@ class LoginForm extends Component {
                         placeholder="User Id"
                         /> 
                     </Form.Field>
-                    <Form.Field >
+                    <Form.Field>
                         <Form.Input type="password" 
                         required
                         name="password"

@@ -1,4 +1,5 @@
 .formContainer{
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -7,4 +8,28 @@
     border: 1px solid var(--gray-border);
     box-shadow: 2px 2px 1rem 1px var(--gray-border);
     border-radius: 5px;
+
+    width: 50vw;
 }
+
+
+@media only screen and (max-width: 1370px) {
+    .formContainer{
+        width: 70vw;
+    }
+}
+
+  @media only screen and (max-width: 1200px) {
+    .formContainer{
+        width: 75vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .formContainer{
+        width: 100vw;
+    }
+}
+
+
+

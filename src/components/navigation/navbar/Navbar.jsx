@@ -6,6 +6,7 @@ import Styles from './Navbar.module.css'
 
 //redux
 import {connect} from 'react-redux'
+import {logout} from '../../../redux/actions/UserAction'
 
 
 class Navbar extends Component {
@@ -32,17 +33,23 @@ class Navbar extends Component {
                     <li className={Styles.listHeader} onClick={()=>this.onHandleClick("/",0)}><h2>B<span>logger</span></h2></li>
                     
                     <li className={this.linkStyle(1)}  onClick={()=>this.onHandleClick("/new-story",1)} style={{marginLeft:"auto"}}>
-                        <i aria-hidden="true" class="plus icon"></i>
+                        <i aria-hidden="true" className="plus icon"></i>
                         <span className={Styles.listSpan}>New Story</span>
                     </li>
-                    <li className={this.linkStyle(2)} onClick={()=>this.onHandleClick("/login",2)}>
-                        <i aria-hidden="true" class="user icon"></i>
+                    <li className={this.linkStyle(2)} onClick={()=>!!user.fullName===false && this.onHandleClick("/login",2)}>
+                        <i aria-hidden="true" className="user icon"></i>
                         {
                            !!user.fullName===true ?
                                     <span className={Styles.listSpan}>{user.fullName}</span>:
                                     <span className={Styles.listSpan}>Login</span> 
                         }
                     </li>
+                    {
+                        !!user.userId && <li className={this.linkStyle(3)} onClick={this.props.logout}>
+                                            <i aria-hidden="true" className="log out icon"></i>
+                                            <span className={Styles.listSpan}>LogOut</span> 
+                                        </li>
+                    }
                 </ul>
             )
     }
@@ -52,4 +59,4 @@ const mapStateToProps=state=>({
     user:state.User
 })
 
-export default  connect(mapStateToProps)(withRouter(Navbar));
+export default  connect(mapStateToProps,{logout})(withRouter(Navbar));

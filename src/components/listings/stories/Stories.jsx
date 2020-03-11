@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import {Pagination} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
-import {getStoriesPagination} from '../../../redux/actions/StoriesAction'
+import {getStoriesPagination,getStoriesPaginationQuery} from '../../../redux/actions/StoriesAction'
 // components
 import StoryContainer from '../../common/story_container/StoryContainer'
 import StoryPlaceHolder from '../../common/placeholder/StoryPlaceHolder'
+import SimpleSearch from '../../common/search/SimpleSearch'
+
+
 
 
 class Stories extends Component {
@@ -14,23 +17,38 @@ class Stories extends Component {
         stories:[],
         total:0,
         totalPage:1,
-        pageSize:5,
-        totalStories:0
+        pageSize:10,
+        totalStories:0,
+        query:"",
+
+        requested:false
     }
 
     requestStories=(skip,top)=>{
-        this.props.getStoriesPagination(skip,top).then(response=>{
-            const {stories,total}=response.payload;
-            this.handlePageCount(total);
-            this.setState({stories,totalStories:total})
-        })
+        this.props.getStoriesPagination(skip,top)
+        this.setState({requested:true})
     }
+
+    requestStoriesQuery=(skip,top,query)=>{
+        this.props.getStoriesPaginationQuery(skip,top,query)
+        this.setState({requested:true})
+    }
+
 
     componentWillMount=()=>{
         const {pageSize}=this.state
         this.requestStories(0,pageSize);
         
     }
+
+    componentWillReceiveProps=(nextProps)=>{
+        const {stories,total}=nextProps.storiesObject
+        if(!!stories===true && stories!==this.state.stories){
+            this.setState({stories,totalStories:total})
+            this.handlePageCount(total)
+        }
+    }
+
 
     handlePageCount=(totalStories)=>{
         const {pageSize}=this.state
@@ -40,16 +58,35 @@ class Stories extends Component {
 
     onPageChange=(e,{activePage})=>{
         let prevPage=activePage-1;
-        const {pageSize}=this.state
-        this.requestStories(prevPage*pageSize,pageSize);
+        const {pageSize,query}=this.state
+        if(!!query==true)
+            this.requestStoriesQuery(prevPage*pageSize,pageSize,query)
+        else 
+            this.requestStories(prevPage*pageSize,pageSize);
     }
+
+    onSearchChange = (event) => {
+        let value=event.target.value
+        value=value.trim()
+
+        this.setState({query:value})
+        const {pageSize}=this.state
+
+        clearTimeout(this.timer);
+        this.timer=setTimeout(()=>{
+                this.setState({isLoading:true})
+                this.requestStoriesQuery(0,pageSize,value)
+        },1000);
+    }
+
     render() {
-        const {stories,totalPage}=this.state
+        const {stories,totalPage,requested}=this.state
 
         return (
             <div>
+               <SimpleSearch onChange={this.onSearchChange}/>
                 {
-                    !!stories.length===true ?  stories.map((story,index)=><StoryContainer key={index} readMore={true} story={story}/>)
+                    !!stories.length===true || requested  ?  stories.map((story,index)=><StoryContainer key={index} readMore={true} story={story}/>)
                     :
                     <StoryPlaceHolder number={3}/>
                 }
@@ -68,4 +105,8 @@ class Stories extends Component {
     }
 }
 
-export default  connect(null,{getStoriesPagination})(Stories);
+const mapStateToProps=state=>({
+    storiesObject:state.Stories
+})
+
+export default  connect(mapStateToProps,{getStoriesPagination,getStoriesPaginationQuery})(Stories);

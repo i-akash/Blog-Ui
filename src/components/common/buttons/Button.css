@@ -2,11 +2,14 @@
     background: linear-gradient(to right,rgb(186, 248, 61), #00CB54);
     text-align: center;
     /* margin:0px 0px 0px 10vw; */
+    min-width: 5rem;
+    margin:2px;
     border-radius: 3px;
     padding: 4px 10px 4px 10px;
     color: black;
     border-width: 0;
     border: 1px solid #00CB54;
+    font-weight: 600;
 }
 
 #custom-button-true{

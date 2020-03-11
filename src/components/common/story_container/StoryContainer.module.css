@@ -1,5 +1,5 @@
 .storyContainer{
-    padding: 3rem 2rem 1.5rem 2rem;
+    padding: 3rem;
     margin: 10px;
     border: 1px solid var(--gray-border);
     border-radius: 3px;
@@ -19,7 +19,7 @@
 }
 
 .storyBoldMetaData{
-    font-weight: bolder;
+    font-style: italic;
     color: rgb(182, 181, 181);
     letter-spacing: .3px;
 }
@@ -27,12 +27,6 @@
 .storyBody{
     color: var(--gray-font-color);
     margin-bottom: 10px;
-
-    display: -webkit-box;
-   -webkit-box-orient: vertical;
-
-   /* to specify the number of lines you want the text to run through... */
-   -webkit-line-clamp: 3;
-   /* hide the overflowing text, i.e, texts that did not fit in to the box */
-   overflow: hidden;
 }
+
+

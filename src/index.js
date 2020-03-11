@@ -33,7 +33,7 @@ if(!!localStorage.getItem('jwtToken')){
 
 
 
-axios.defaults.headers.common.Authorization =`Bearer ${localStorage.getItem("jwtToken")}` ;
+axios.defaults.headers.common.Authorization =`Bearer ${localStorage.getItem("jwtToken")}`;
 
 ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
 

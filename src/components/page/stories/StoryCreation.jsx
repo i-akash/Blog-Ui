@@ -3,6 +3,7 @@ import StoryForm from '../../forms/stories/StoryForm'
 
 import storyApi from '../../../api/StoriesApi'
 
+
 export default class StoryCreation extends Component {
     
     constructor(props){
@@ -15,7 +16,8 @@ export default class StoryCreation extends Component {
     render() {
         return (
             <div>
-                <StoryForm onAddStory={this.onAddStory}/>
+                
+                <StoryForm header="Create Story" onSubmitStory={this.onAddStory} btnText="Add Story" story={{}}/>
             </div>
         )
     }

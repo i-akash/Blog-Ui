@@ -6,6 +6,7 @@ import LoginPage from '../../page/auth/LoginPage'
 import RegisterPage from '../../page/auth/RegistrationPage'
 import StoryCreation from '../../page/stories/StoryCreation'
 import StoryEdit from '../../page/stories/StoryEdit'
+import Story from '../../page/stories/Story'
 
 export default function AppRoute(){
     return (
@@ -16,7 +17,8 @@ export default function AppRoute(){
             <Route path="/register" exact component ={RegisterPage}/>
 
             <Route path="/new-story" exact component ={StoryCreation}/>
-            <Route path="/edit-story" exact component ={StoryEdit}/>
+            <Route path="/edit-story/:storyId" exact component ={StoryEdit}/>
+            <Route path="/story/:storyId" exact component={Story}/>
             
         </Switch>
     )

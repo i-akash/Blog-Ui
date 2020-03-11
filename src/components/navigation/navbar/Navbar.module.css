@@ -9,7 +9,7 @@
     padding-bottom: 0rem;
     padding-left: 20vw;
     padding-right: 20vw;
-    box-shadow: 0 -1.5px .5rem .5px var(--navbar-shadow) inset;
+    box-shadow: 0 -1.8px .7rem .8px var(--navbar-shadow) inset;
     background-color: var(--navbar-background-color);
     color: var(--navbar-link-color);
     z-index: 1000;

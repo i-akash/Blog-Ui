@@ -4,6 +4,7 @@ import React from 'react';
 //components
 import Navbar from './components/navigation/navbar/Navbar'
 import AppRoute from './components/navigation/route/AppRoute'
+import Footer from './components/common/footer/Footer'
 //css
 import styles from './App.module.css';
 
@@ -12,7 +13,10 @@ function App() {
   return (
     <div className={styles.appWindow}>
         <Navbar/>
-        <AppRoute/>
+        <div className={styles.container}>
+          <AppRoute/>
+        </div>
+        <Footer/>
     </div>
   );
 }
