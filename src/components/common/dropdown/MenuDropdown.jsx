@@ -1,6 +1,5 @@
 import React from 'react'
 import {Dropdown} from 'semantic-ui-react';
-import './Dropdown.css'
 
 export default class MenuDropdown extends React.Component{
 
@@ -16,17 +15,14 @@ export default class MenuDropdown extends React.Component{
     render(){
             const {list,icon}=this.props
             return (
-                <Dropdown item simple icon={icon} ref={this.dropRef} closeOnBlur>
+                <Dropdown  item simple icon={icon} ref={this.dropRef} closeOnBlur className='icon'>
                     <Dropdown.Menu>
                         {
                             list.map((task,index)=>
-                                
-                                    <Dropdown.Item 
-                                        key={index}
-                                        onClick={()=>this.onSelect({name:task.name,path:task.path})}
-                                    >
-                                        {task.name}
-                                    </Dropdown.Item>
+                                    <Dropdown.Item  key={index} 
+                                                    icon={task.icon} 
+                                                    text={task.name}  
+                                                    onClick={()=>this.onSelect({name:task.name,path:task.path})}/>
                             )
                         }
                     </Dropdown.Menu>

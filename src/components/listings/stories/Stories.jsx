@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Pagination} from 'semantic-ui-react'
+import {Pagination, Transition} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
 import {getStoriesPagination,getStoriesPaginationQuery} from '../../../redux/actions/StoriesAction'
@@ -25,13 +25,11 @@ class Stories extends Component {
     }
 
     requestStories=(skip,top)=>{
-        this.props.getStoriesPagination(skip,top)
-        this.setState({requested:true})
+        this.props.getStoriesPagination(skip,top).then(res=>this.setState({requested:true}))
     }
 
     requestStoriesQuery=(skip,top,query)=>{
-        this.props.getStoriesPaginationQuery(skip,top,query)
-        this.setState({requested:true})
+        this.props.getStoriesPaginationQuery(skip,top,query).then(res=>this.setState({requested:true}))
     }
 
 
@@ -85,11 +83,14 @@ class Stories extends Component {
         return (
             <div>
                <SimpleSearch onChange={this.onSearchChange}/>
+                
                 {
-                    !!stories.length===true || requested  ?  stories.map((story,index)=><StoryContainer key={index} readMore={true} story={story}/>)
+                    !!stories.length===true || requested  ? 
+                    stories.map((story,index)=><StoryContainer key={index} readMore={true} story={story}/>)
                     :
                     <StoryPlaceHolder number={3}/>
                 }
+                
                 <Pagination
                     inverted
                     defaultActivePage={1}

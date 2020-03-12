@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Form,Message} from 'semantic-ui-react'
+import {Form,Message,Transition} from 'semantic-ui-react'
 import Button from '../../common/buttons/Button'
 import Header from '../../common/header/Header'
 import {login} from '../../../redux/actions/UserAction'
@@ -42,11 +42,13 @@ class LoginForm extends Component {
     render() {
         const {userId,password,loading,status}=this.state
         return (
-               <Form loading={loading} onSubmit={this.onSubmit}>
+               <Form loading={loading} inverted onSubmit={this.onSubmit}>
                    <Header 
                     header="Login"
                    />
-                   {!!status && <Message>{status}</Message>}
+                   <Transition visible={!!status} animation='fade' duration={800}>
+                        <Message>{status}</Message>
+                    </Transition>
                     <Form.Field>
                         <Form.Input
                         required

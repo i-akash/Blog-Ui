@@ -8,7 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css'
 
 // third 
-import axios from 'axios';
 import {BrowserRouter} from 'react-router-dom'
 
 //redux
@@ -32,9 +31,5 @@ if(!!localStorage.getItem('jwtToken')){
 
 
 
-
-axios.defaults.headers.common.Authorization =`Bearer ${localStorage.getItem("jwtToken")}`;
-
 ReactDOM.render(<Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));
-
 serviceWorker.unregister();

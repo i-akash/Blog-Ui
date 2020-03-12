@@ -17,19 +17,8 @@ class TinyEditor extends React.Component {
           <Editor
             initialValue="<p>This is the initial content of the editor</p>"
             init={{
-              skin: "oxide-dark",
-              content_css: "dark",
-
               height: 500,
               menubar: false,
-              plugins: [
-                'advlist lists link image preview anchor',
-                'visualblocks fullscreen',
-                'insertdatetime media table paste wordcount'
-              ],
-              toolbar:
-                'undo redo | formatselect | bold italic backcolor preview | alignleft | \
-                bullist indent'
             }}
             onEditorChange={this.handleEditorChange}
             value={content}

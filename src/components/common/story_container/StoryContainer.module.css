@@ -3,7 +3,7 @@
     margin: 10px;
     border: 1px solid var(--gray-border);
     border-radius: 3px;
-    box-shadow: 2px 2px 1rem 1px var(--gray-border);
+    box-shadow: 3px 3px 1.5rem 3px var(--gray-border);
 }
 
 .storyHeader{

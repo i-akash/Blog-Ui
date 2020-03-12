@@ -1,10 +1,11 @@
 .textButton{
     color: var(--yellow-green);
-    background-color: black;
+    background-color: var(--black-bg-color);
     border-width: 0;
     padding: 0;
 }
 
 .textButton:hover{
     cursor: pointer;
+    color: var(--gray-font-color);
 }

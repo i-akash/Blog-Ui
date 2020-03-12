@@ -8,10 +8,12 @@
   align-items: center;
   font-size: 17px;
   color: var( --yellow-green);
+  
 }
 
 .container{
   width: 60vw;
+  height: 100% !important;
 }
 
 @media only screen and (max-width: 1370px) {

@@ -7,12 +7,14 @@ export default ({header,text,open, btn1,click1,btn2,click2,btn1Visiblity=true,bt
         <Modal basic open={open} size='tiny' >
             <Modal.Header>{header}</Modal.Header>
             <Modal.Content>
-            <p>
-                {text}
-            </p>
+                <p>
+                    {text}
+                </p>
             </Modal.Content>
-            {btn1Visiblity && <Button text={btn1} onClick={click1}/>}
-            {btn2Visiblity && <Button text={btn2} onClick={click2}/>}
+            <Modal.Actions>
+                {btn1Visiblity && <Button text={btn1} onClick={click1}/>}
+                {btn2Visiblity && <Button text={btn2} onClick={click2}/>}    
+            </Modal.Actions>
         </Modal>
     )
 }

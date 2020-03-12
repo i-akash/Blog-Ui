@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Header from '../../common/header/Header'
 import Button from '../../common/buttons/Button'
 import TinyEditor from '../../common/editor/TinyEditor'
-import {Form,Message} from 'semantic-ui-react'
+import {Form,Message,Transition} from 'semantic-ui-react'
 import {DateInput} from 'semantic-ui-calendar-react';
 import pureHtml from '../../../pureIt/PureHtml'
 
@@ -20,10 +20,11 @@ class StoryForm extends Component {
         title:'',
         editorContent:"",
         date:new Date(),
-
+        
         success:false,
         formError:{}
     }
+
 
     componentWillReceiveProps=(nextProps)=>{
         const {story}=nextProps
@@ -35,12 +36,12 @@ class StoryForm extends Component {
         this.setState({[event.target.name]:event.target.value,formError:{}})
     }
 
-    onContentChange=(editorContent)=>this.setState({editorContent})
+    onContentChange=(editorContent)=>this.setState({editorContent,formError:{}})
     
     onDateChange=(event, {name, value})=>{
         console.log(value);
         
-        this.setState({[name]:value})
+        this.setState({[name]:value,formError:{}})
     }
 
     onSubmit=(event)=>{
@@ -68,8 +69,9 @@ class StoryForm extends Component {
                                     btn1="Home" click1={()=>this.props.history.push("/")} 
                                     btn2="Continue" click2={()=>this.setState({success:!success})} open={success}/>
                         
-                        
-                        
+                        <Transition visible={!!formError.message} animation='fade' duration={800}>
+                                <Message>{formError.message}</Message>
+                        </Transition>
                         <Form.Field>
                             <Form.Input
                             required
@@ -84,7 +86,7 @@ class StoryForm extends Component {
                             /> 
                         </Form.Field>
                         {formError.Body && <Message>{ formError.Body[0]}</Message>}
-                        <TinyEditor onContentChange={this.onContentChange} content={editorContent}/>
+                            <TinyEditor onContentChange={this.onContentChange} content={editorContent}/>
                         <DateInput
                             name="date"
                             placeholder="Date"

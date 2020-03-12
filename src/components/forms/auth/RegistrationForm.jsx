@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import {Form,Message} from 'semantic-ui-react'
+import {Form,Message,Transition} from 'semantic-ui-react'
 import Button from '../../common/buttons/Button'
+
+//css
 import './Form.css'
-import api from '../../../api/AuthApi'
+
 import Header from '../../common/header/Header'
 import authApi from '../../../api/AuthApi'
 
@@ -57,11 +59,14 @@ export default class RegistrationForm extends Component {
     render() {
         const {fullName,userId,password,confirmPassword,formError,status}=this.state
         return (
-            <Form onSubmit={this.onSubmit}>
+            <Form inverted onSubmit={this.onSubmit}>
                 <Header 
                     header="Register"
                 />
-                {!!status && <Message>{status}</Message>}
+                <Transition visible={!!formError.message} animation='fade' duration={800}>
+                                <Message>{formError.message}</Message>
+                </Transition>
+
                 <Form.Field>
                     <Form.Input
                         required

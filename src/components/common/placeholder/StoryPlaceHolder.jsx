@@ -1,12 +1,14 @@
 import React from 'react'
-import {Placeholder} from 'semantic-ui-react'
+import {Placeholder,Transition} from 'semantic-ui-react'
 //css
 import './StoryPlaceHolder.css'
 export default function StoryPlaceHolder({number}) {
     return (
+        
         <React.Fragment>
             {
                 [...Array(number)].map(index=>
+                    <Transition animation={"fade"} duration={500}> 
                         <Placeholder key={index} inverted fluid> 
                                 <Placeholder.Header>
                                     <Placeholder.Line />
@@ -29,6 +31,7 @@ export default function StoryPlaceHolder({number}) {
                                 </Placeholder.Paragraph>
                                 
                         </Placeholder>
+                    </Transition>
                 )
             }
         </React.Fragment>

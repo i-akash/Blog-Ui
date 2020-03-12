@@ -20,15 +20,18 @@
   --form-bg-color:black;
   --gray-font-color:#888;
   --green-font-color:#00CB54;
+  --form-input-border-color:#00CB54;
 
+  /* global */
+  --black-bg-color:black;
+  --gray-focus-color:gray;
 
   --green-border:#a8d500;
-  --gray-border:rgba(136, 136, 136, 0.137);
+  --gray-border:rgba(136, 136, 136, 0.24);
   
   --white: #fff;
   --background:#282c34;
   --shadow: #4e4e4e5b;
-  --blue:#61dafb;
 }
 
 

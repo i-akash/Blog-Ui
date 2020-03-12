@@ -24,7 +24,9 @@ class Navbar extends Component {
 
     linkStyle=(currentId)=>{
         const {activeItem}=this.state
-        return currentId===activeItem ? Styles.listItemActive : Styles.listItem;
+        const {user}=this.props;
+
+        return currentId===activeItem && (!!user.userId===false || activeItem!==2) ? Styles.listItemActive : Styles.listItem;
     }
     render() {
         const {user}=this.props;
