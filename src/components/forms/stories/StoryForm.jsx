@@ -9,6 +9,9 @@ import pureHtml from '../../../pureIt/PureHtml'
 
 import {formatDate} from '../../common/date/DateFormate'
 
+//redux
+import {connect} from 'react-redux'
+import {updateNavigation} from '../../../redux/actions/GlobalAction'
 
 // import SemanticDatepicker from 'react-semantic-ui-datepickers';
 // import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
@@ -60,6 +63,11 @@ class StoryForm extends Component {
                   .catch(err=>this.setState({loading:false,formError:err.response.data.errors}));
     }
 
+    onRoute=(path,name)=>{
+        this.props.updateNavigation(name);
+        this.props.history.push(path)
+    }
+
     render() {
         const {header,btnText}=this.props
         const {date,title,editorContent,loading,success,formError}=this.state
@@ -73,7 +81,7 @@ class StoryForm extends Component {
 
                    <Alert header={`${header} Confirmation`} 
                                     text={`${header} Success`} 
-                                    btn1="Home" click1={()=>this.props.history.push("/")} 
+                                    btn1="Home" click1={()=>this.onRoute("/",0)} 
                                     btn2="Continue" click2={()=>this.setState({success:!success})} open={success}/>
                         
                         <Transition visible={!!formError.message} animation='fade' duration={800}>
@@ -115,4 +123,4 @@ class StoryForm extends Component {
     }
 }
 
-export default withRouter(StoryForm)
+export default connect(null,{updateNavigation})(withRouter(StoryForm))

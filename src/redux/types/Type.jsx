@@ -11,3 +11,4 @@ export const EDIT_STORY="EDIT_STORY"
 export const DELETE_STORY="DELETE_STORY"
 export const STORY_PAGE="STORY_PAGE"
 
+export const NAVIGATION_ITEM="NAVIGATION_ITEM"

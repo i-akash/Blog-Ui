@@ -7,6 +7,7 @@ import Styles from './Navbar.module.css'
 //redux
 import {connect} from 'react-redux'
 import {logout} from '../../../redux/actions/UserAction'
+import {updateNavigation} from '../../../redux/actions/GlobalAction'
 
 
 class Navbar extends Component {
@@ -18,14 +19,12 @@ class Navbar extends Component {
     }
 
     onHandleClick=(path,name)=>{
-       this.setState({activeItem:name})
-
+       this.props.updateNavigation(name)
        this.props.history.push(path) 
     }
 
     linkStyle=(currentId)=>{
-        const {activeItem}=this.state
-        const {user}=this.props;
+        const {activeItem}=this.props.global
         
         return currentId===activeItem ? Styles.listItemActive : Styles.listItem;
     }
@@ -38,8 +37,9 @@ class Navbar extends Component {
     }
 
     onlogout=()=>{
-        this.setState({activeItem:-1})
-        this.props.logout();
+        
+       this.props.updateNavigation(-1)
+       this.props.logout();
     }
 
     render() {
@@ -85,7 +85,8 @@ class Navbar extends Component {
 }
 
 const mapStateToProps=state=>({
-    user:state.User
+    user:state.User,
+    global:state.Global
 })
 
-export default  connect(mapStateToProps,{logout})(withRouter(Navbar));
+export default  connect(mapStateToProps,{logout,updateNavigation})(withRouter(Navbar));
