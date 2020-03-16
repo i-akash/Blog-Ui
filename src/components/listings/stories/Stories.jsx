@@ -1,165 +1,170 @@
-import React, { Component } from 'react'
-import {Pagination,Transition,Input,Message} from 'semantic-ui-react'
+import React, { Component } from "react";
+import { Pagination, Transition, Input, Message } from "semantic-ui-react";
 
-import {connect} from 'react-redux'
-import {getStoriesPagination,getStoriesPaginationQuery} from '../../../redux/actions/StoriesAction'
+import { connect } from "react-redux";
+import {
+  getStoriesPagination,
+  getStoriesPaginationQuery
+} from "../../../redux/actions/StoriesAction";
 // components
-import StoryContainer from '../../common/container/StoryContainer'
-import StoryPlaceHolder from '../../common/placeholder/StoryPlaceHolder'
-import SimpleSearch from '../../common/search/SimpleSearch'
+import StoryContainer from "../../common/container/StoryContainer";
+import StoryPlaceHolder from "../../common/placeholder/StoryPlaceHolder";
+import SimpleSearch from "../../common/search/SimpleSearch";
 
-//css 
-import Styles from './Stories.module.css'
-
+//css
+import Styles from "./Stories.module.css";
 
 class Stories extends Component {
-    
-    state={
-        stories:[],
-        totalStories:0,
-        
-        totalPage:1,
-        pageSize:10,
-        
-        query:"",
-        activePage:1,
+  state = {
+    stories: [],
+    totalStories: 0,
 
-        loading:true,
+    totalPage: 1,
+    pageSize: 5,
+
+    query: "",
+    activePage: 1,
+
+    loading: true
+  };
+
+  requestStories = (skip, top) => {
+    this.setState({ loading: true });
+    this.props
+      .getStoriesPagination(skip, top)
+      .then(res => this.setState({ loading: false }))
+      .catch(err => this.setState({ loading: false }));
+  };
+
+  requestStoriesQuery = (skip, top, query) => {
+    this.props
+      .getStoriesPaginationQuery(skip, top, query)
+      .then(res => this.setState({ loading: false }))
+      .catch(err => this.setState({ loading: false }));
+  };
+
+  componentDidMount = () => {
+    const { pageSize } = this.state;
+    this.requestStories(0, pageSize);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const { stories, total } = nextProps.storiesObject;
+    if (!!stories === true && stories !== this.state.stories) {
+      this.setState({ stories, totalStories: total });
+      this.handlePageCount(total);
     }
+  };
 
-    requestStories=(skip,top)=>{
-        this.setState({loading:true})
-        this.props.getStoriesPagination(skip,top).then(res=>this.setState({loading:false})).catch(err=>this.setState({loading:false}))
-    }
+  handlePageCount = totalStories => {
+    const { pageSize } = this.state;
+    let totalPage = Math.ceil(totalStories / pageSize);
+    this.setState({ totalPage });
+  };
 
-    requestStoriesQuery=(skip,top,query)=>{
-        this.props.getStoriesPaginationQuery(skip,top,query).then(res=>this.setState({loading:false})).catch(err=>this.setState({loading:false}))
-    }
+  onPageChange = (e, { activePage }) => {
+    this.setState({ activePage });
+    let prevPage = activePage - 1;
+    const { pageSize, query } = this.state;
 
+    if (!!query == true)
+      this.requestStoriesQuery(prevPage * pageSize, pageSize, query);
+    else this.requestStories(prevPage * pageSize, pageSize);
+  };
 
-    componentDidMount=()=>{
-        const {pageSize}=this.state
-        this.requestStories(0,pageSize);
-        
-    }
+  onSearchChange = event => {
+    let value = event.target.value;
+    value = value.trim();
 
-    componentWillReceiveProps=(nextProps)=>{
-        const {stories,total}=nextProps.storiesObject
-        if(!!stories===true && stories!==this.state.stories){
-            this.setState({stories,totalStories:total})
-            this.handlePageCount(total)
-        }
-    }
+    this.setState({ query: value, loading: true });
+    const { pageSize } = this.state;
 
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => {
+      this.requestStoriesQuery(0, pageSize, value);
+    }, 1000);
+  };
 
-    handlePageCount=(totalStories)=>{
-        const {pageSize}=this.state
-        let totalPage=Math.ceil(totalStories/pageSize);
-        this.setState({totalPage});
-    }
+  onPageSizeChange = event => {
+    clearTimeout(this.timer);
 
-    onPageChange=(e,{activePage})=>{
-        this.setState({activePage})
-        let prevPage=activePage-1;
-        const {pageSize,query}=this.state
-        
-        if(!!query==true)
-            this.requestStoriesQuery(prevPage*pageSize,pageSize,query)
-        else 
-            this.requestStories(prevPage*pageSize,pageSize);
-    }
+    const { query, activePage } = this.state;
 
-    onSearchChange = (event) => {
-        let value=event.target.value
-        value=value.trim()
+    const currentPageSize = parseInt(event.target.value);
+    const { pageSize } = this.state;
+    const prevPage = activePage - 1;
 
-        this.setState({query:value,loading:true})
-        const {pageSize}=this.state
+    this.setState({ pageSize: currentPageSize });
 
-        clearTimeout(this.timer);
-        this.timer=setTimeout(()=>{
-                this.requestStoriesQuery(0,pageSize,value)
-        },1000);
-    }
+    this.timer = setTimeout(() => {
+      if (!!query == true)
+        this.requestStoriesQuery(prevPage * pageSize, currentPageSize, query);
+      else this.requestStories(prevPage * pageSize, currentPageSize);
+    }, 1000);
+  };
 
-    
-    onPageSizeChange=(event)=>{
-        
-        clearTimeout(this.timer);
-        
-        const {query,activePage}=this.state
+  getView = () => {
+    const { stories, loading, query } = this.state;
+    if (loading) return <StoryPlaceHolder number={3} />;
+    const length = stories.length;
+    if (!!length)
+      return (
+        <React.Fragment>
+          <Transition
+            visible={!!query && !loading}
+            animation="fade"
+            duration={800}
+          >
+            <Message color="black" list={[`${length} Stories Found`]} />
+          </Transition>
+          {stories.map((story, index) => (
+            <StoryContainer key={index} readMore={true} story={story} />
+          ))}
+        </React.Fragment>
+      );
 
-        const currentPageSize=parseInt(event.target.value);
-        const {pageSize}=this.state
-        const prevPage=activePage-1; 
-        
-        
-        this.setState({pageSize:currentPageSize})
-        
-        this.timer=setTimeout(()=>{
-            if(!!query==true)
-                this.requestStoriesQuery(prevPage*pageSize,currentPageSize,query)
-            else 
-                this.requestStories(prevPage*pageSize,currentPageSize);
-        },1000)
+    return (
+      <Transition visible={true} animation="fade" duration={800}>
+        <Message negative list={["No Stories Found"]} />
+      </Transition>
+    );
+  };
 
-    }
+  render() {
+    const { totalPage, pageSize } = this.state;
 
-
-
-    getView=()=>{
-
-        const {stories,loading,query}=this.state
-        if(loading)
-            return <StoryPlaceHolder number={3}/>;
-        const length=stories.length
-        if(!!length)
-            return <React.Fragment>
-                        <Transition visible={!!query && !loading} animation='fade' duration={800}>
-                            <Message color='black' list={[`${length} Stories Found`]}/>
-                        </Transition>
-                        { stories.map((story,index)=><StoryContainer key={index} readMore={true} story={story}/>)}
-                    </React.Fragment> 
-        
-        return  <Transition visible={true} animation='fade' duration={800}>
-                    <Message negative list={["No Stories Found"]}/>
-                </Transition>
-    }
-
-
-    render() {
-        const {totalPage,pageSize}=this.state
-
-        return (
-            <div>
-               <SimpleSearch onChange={this.onSearchChange}/>
-                <div className={Styles.StoriesContainer}>
-                    {this.getView()}
-                </div>
-                <Input icon
-                        type='number'
-                        size='mini' 
-                        value={pageSize} 
-                        onChange={this.onPageSizeChange}  
-                        placeholder='page size'>
-                </Input>
-                <Pagination
-                    inverted
-                    defaultActivePage={1}
-                    firstItem={null}
-                    lastItem={null}
-                    pointing
-                    secondary
-                    totalPages={totalPage}
-                    onPageChange={this.onPageChange}
-                />
-            </div>
-        )
-    }
+    return (
+      <div>
+        <SimpleSearch onChange={this.onSearchChange} />
+        <div className={Styles.StoriesContainer}>{this.getView()}</div>
+        <Input
+          icon
+          type="number"
+          size="mini"
+          value={pageSize}
+          onChange={this.onPageSizeChange}
+          placeholder="page size"
+        ></Input>
+        <Pagination
+          inverted
+          defaultActivePage={1}
+          firstItem={null}
+          lastItem={null}
+          pointing
+          secondary
+          totalPages={totalPage}
+          onPageChange={this.onPageChange}
+        />
+      </div>
+    );
+  }
 }
 
-const mapStateToProps=state=>({
-    storiesObject:state.Stories
-})
+const mapStateToProps = state => ({
+  storiesObject: state.Stories
+});
 
-export default  connect(mapStateToProps,{getStoriesPagination,getStoriesPaginationQuery})(Stories);
+export default connect(mapStateToProps, {
+  getStoriesPagination,
+  getStoriesPaginationQuery
+})(Stories);
