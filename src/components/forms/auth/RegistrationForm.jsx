@@ -7,8 +7,11 @@ import './Form.css'
 
 import Header from '../../common/header/Header'
 import authApi from '../../../api/AuthApi'
+import Alert from '../../common/alert/Alert'
 
-export default class RegistrationForm extends Component {
+import {withRouter} from 'react-router-dom'
+
+class RegistrationForm extends Component {
     state={
         fullName:"",
         userId:"",
@@ -17,6 +20,7 @@ export default class RegistrationForm extends Component {
 
         loading:false,
         error:false,
+        success:false,
         status:"",
         formError:{
 
@@ -39,10 +43,7 @@ export default class RegistrationForm extends Component {
             let lastName=fullName[1]
 
             authApi.register({userId,firstName,lastName,password})    
-                .then(resp=>{
-                    this.setState({loading:false})
-                    this.props.onSuccess();
-                })
+                .then(resp=>this.setState({loading:false,success:true}))
                 .catch(err=>this.setState({loading:false,formError:err.response.data.errors}))    
         }
     }
@@ -57,16 +58,21 @@ export default class RegistrationForm extends Component {
      
 
     render() {
-        const {fullName,userId,password,confirmPassword,formError,status}=this.state
+        const {fullName,userId,password,confirmPassword,formError,status,success}=this.state
         return (
+            <div className="form-container">
+           
             <Form inverted onSubmit={this.onSubmit}>
                 <Header 
                     header="Register"
                 />
                 <Transition visible={!!formError.message} animation='fade' duration={800}>
-                                <Message>{formError.message}</Message>
+                                <Message negative list={formError.message}/>
                 </Transition>
-
+                <Alert header={`Registration Status`} 
+                                    text={`Successfully Registered`} 
+                                    btn1="Login" click1={()=>this.props.history.push("/login")}  
+                                    btn2="Continue" click2={()=>this.setState({success:!success})} btn2Visiblity={false} open={success}/>
                 <Form.Field>
                     <Form.Input
                         required
@@ -120,6 +126,10 @@ export default class RegistrationForm extends Component {
                 </Form.Field>
                 <Button text="register"/>
             </Form>
+            </div>
         )
     }
 }
+
+
+export default withRouter(RegistrationForm);

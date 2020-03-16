@@ -5,9 +5,9 @@ import './SimpleSearch.css'
 
 export default function SimpleSearch({value,onChange,onClick}){
     return (
-        <div class="ui icon input">
+        <div className="ui icon input">
             <input type="text" name="query" placeholder="Search..." value={value} onChange={onChange} />
-            <i aria-hidden="true" class="search circular inverted link icon" onClick={onClick}></i>
+            <i aria-hidden="true" className="search circular inverted link icon" onClick={onClick}></i>
         </div>
     )
 }

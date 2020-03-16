@@ -20,9 +20,7 @@ export default class AuthPage extends Component {
                             <label>{alternateText}</label>
                             <Button text={alternateButton} onClick={this.gotoLoginPage}/>
                     </div>
-                    <div className="form-container">
-                        <RegisterForm onSuccess={this.gotoLoginPage} />
-                    </div>
+                    <RegisterForm onSuccess={this.gotoLoginPage} />
             </div>
         )
     }

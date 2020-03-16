@@ -24,10 +24,7 @@ export default class AuthPage extends Component {
                             <label>{alternateText}</label>
                             <Button text={alternateButton} onClick={this.onRegisterPage}/>
                     </div>
-
-                    <div className="form-container">
-                        <LoginForm onLogin={this.onLogin}/>
-                    </div>
+                    <LoginForm onLogin={this.onLogin}/>
             </div>
         )
     }

@@ -7,19 +7,22 @@ import RegisterPage from '../../page/auth/RegistrationPage'
 import StoryCreation from '../../page/stories/StoryCreation'
 import StoryEdit from '../../page/stories/StoryEdit'
 import Story from '../../page/stories/Story'
+import UserPage from '../../page/auth/UserPage'
 
 export default function AppRoute(){
     return (
         <Switch>
             <Route path="/" exact component={Home} />
-            
             <Route path="/login" exact component={LoginPage}/>
             <Route path="/register" exact component ={RegisterPage}/>
-
+            
+            <Route path="/user" exact component={UserPage}/>
+            
             <Route path="/new-story" exact component ={StoryCreation}/>
             <Route path="/edit-story/:storyId" exact component ={StoryEdit}/>
             <Route path="/story/:storyId" exact component={Story}/>
             
+            <Route exact render={()=><div>Not Found</div>} />
         </Switch>
     )
 }

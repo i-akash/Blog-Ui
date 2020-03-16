@@ -1,6 +1,8 @@
 import React from 'react'
 import {Dropdown} from 'semantic-ui-react';
 
+import './MenuDropdown.css'
+
 export default class MenuDropdown extends React.Component{
 
     constructor(props){
@@ -15,7 +17,7 @@ export default class MenuDropdown extends React.Component{
     render(){
             const {list,icon}=this.props
             return (
-                <Dropdown  item simple icon={icon} ref={this.dropRef} closeOnBlur className='icon'>
+                <Dropdown  item simple pointing='top right' icon={icon} ref={this.dropRef} closeOnBlur className='icon'>
                     <Dropdown.Menu>
                         {
                             list.map((task,index)=>

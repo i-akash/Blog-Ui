@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import StoryContainer from '../../common/story_container/StoryContainer'
+import StoryContainer from '../../common/container/StoryContainer'
 import storyApi from '../../../api/StoriesApi'
 import StoryPlaceHolder from '../../common/placeholder/StoryPlaceHolder'
 

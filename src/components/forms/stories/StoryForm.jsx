@@ -7,8 +7,15 @@ import {Form,Message,Transition} from 'semantic-ui-react'
 import {DateInput} from 'semantic-ui-calendar-react';
 import pureHtml from '../../../pureIt/PureHtml'
 
+import {formatDate} from '../../common/date/DateFormate'
+
+
+// import SemanticDatepicker from 'react-semantic-ui-datepickers';
+// import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
+
 //css
 import Styles from './StoryForm.module.css'
+
 import Alert from '../../common/alert/Alert'
 
 import {withRouter} from 'react-router-dom'
@@ -70,7 +77,7 @@ class StoryForm extends Component {
                                     btn2="Continue" click2={()=>this.setState({success:!success})} open={success}/>
                         
                         <Transition visible={!!formError.message} animation='fade' duration={800}>
-                                <Message>{formError.message}</Message>
+                                <Message negative header="Error" list={[formError.message]}/>
                         </Transition>
                         <Form.Field>
                             <Form.Input
@@ -85,12 +92,14 @@ class StoryForm extends Component {
                               }}
                             /> 
                         </Form.Field>
-                        {formError.Body && <Message>{ formError.Body[0]}</Message>}
+                        {formError.Body && <Message negative header="Error" list={formError.Body}/>}
                             <TinyEditor onContentChange={this.onContentChange} content={editorContent}/>
                         <DateInput
+                            animation='zoom'
+                            duration={0}
                             name="date"
                             placeholder="Date"
-                            value={date}
+                            value={formatDate(date)}
                             iconPosition="left"
                             onChange={this.onDateChange}
                             dateFormat="YYYY-MM-DD"

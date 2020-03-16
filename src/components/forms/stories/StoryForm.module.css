@@ -9,7 +9,7 @@
     box-shadow: 2px 2px 1rem 1px var(--gray-border);
     border-radius: 5px;
 
-    width: 50vw;
+    width: 60vw;
 }
 
 
@@ -30,6 +30,3 @@
         width: 100vw;
     }
 }
-
-
-

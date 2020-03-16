@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Philosopher&display=swap');
 
 :root{
   /* navbar */
@@ -19,6 +19,7 @@
   /* form */
   --form-bg-color:black;
   --gray-font-color:#888;
+  --whites-font-color:rgba(245, 245, 245, 0.781);
   --green-font-color:#00CB54;
   --form-input-border-color:#00CB54;
 
@@ -26,7 +27,7 @@
   --black-bg-color:black;
   --gray-focus-color:gray;
 
-  --green-border:#a8d500;
+  --green-border:#00CB54;
   --gray-border:rgba(136, 136, 136, 0.24);
   
   --white: #fff;
@@ -37,13 +38,20 @@
 
 body {
   margin: 0;
+  font-display: swap;
   font-family: 'Roboto', sans-serif !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
+  font-size: 15px;
 }
 
 h1,h2,h3,h4,h5,h6{
-  font-family: 'Playfair Display', serif !important;
+  font-family: 'Philosopher', sans-serif !important;
+  font-display: swap;
+  color: var(--whites-font-color);
+}
+
+li{
+  font-display: swap;
+  font-family: 'Philosopher', sans-serif !important;
 }
 
 h3{

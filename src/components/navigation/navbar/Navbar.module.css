@@ -40,7 +40,8 @@
     padding: 5px;
     font-weight: bold;
     font-size: 15px;
-
+    text-transform: capitalize;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,10 +62,19 @@
     align-items: center;
 }
 
+.listHeader{
+    font-size: 28px;
+    color: var(--green-font-color) !important;
+}
+
+.listHeader:hover{
+    cursor: pointer;
+}
 .listItem:hover {
     color: var(--gray-font-color);
     cursor: pointer;
 }
+
 
 .listSpan {
     margin: 5px;

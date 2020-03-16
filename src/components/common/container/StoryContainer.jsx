@@ -11,7 +11,6 @@ import {deleteStory} from '../../../redux/actions/StoriesAction'
 
 // css
 import Styles from './StoryContainer.module.css'
-import {Header,Transition} from 'semantic-ui-react'
 import Alert from '../alert/Alert'
 
 
@@ -24,6 +23,7 @@ class StoryContainer extends Component {
                 {name:"Edit",path:"/edit-story",icon:"edit"},
                 {name:"Delete",path:"/delete-story",icon:"delete"},   
             ],
+            permission:false,
             success:false
         }
     }
@@ -33,12 +33,13 @@ class StoryContainer extends Component {
         this.setState({...settingTask,[name]:path})
     }
 
+    onDelete=(storyId)=>
+        this.props.deleteStory(storyId).then(resp=>this.setState({success:true,permission:false})).catch(err=>this.setState({permission:false}));
+    
     onRoute=(name,path,id)=>{
-        console.log(name,path);
-        
         if(name==="Delete")
             {
-                this.props.deleteStory(id).then(resp=>this.setState({success:true})).catch(err=>{});
+                this.setState({permission:true});
                 return ;
             }
         this.props.history.push(`${path}/${id}`);
@@ -52,26 +53,30 @@ class StoryContainer extends Component {
         const {user}=this.props
         const {author}=story
 
-        let {settingTask,success}=this.state
+        let {settingTask,success,permission}=this.state
         let content=readMore===true && !!story.body===true ? `${story.body.substring(0,1000)}......`:story.body;
         
         return (
-        <Transition animation={"fade"} duration={500}>   
             <div className={Styles.storyContainer}>
-                    <Alert header="Deletion Status" 
-                                        text={`Deleted Successfully`}
-                                        btn1="Home"  click1={()=>this.props.history.push('/')}  btn1Visiblity={!readMore}
-                                        btn2="Ok" click2={()=>this.setState({success:!success})} open={success} btn2Visiblity={readMore}/>
+                    <Alert  header="Deletion Status" 
+                            text={`Deleted Successfully`}
+                            btn1="Home"  click1={()=>this.props.history.push('/')}  btn1Visiblity={!readMore}
+                            btn2="Ok" click2={()=>this.setState({success:!success})} open={success} btn2Visiblity={readMore}/>
                     
+                    <Alert  header="Deletion Permission" 
+                            text={`Are you sure, you want to delete ?`}
+                            btn1="Yes"  click1={()=>this.onDelete(story.storyId)}  
+                            btn2="No" click2={()=>this.setState({permission:false})} open={permission}/>
                     
+
                     <div>
                         <h3 className={Styles.storyHeader}>{story.title}</h3>
                         <div className={Styles.storyMetaData}>
                             <span>
                             By <label className={Styles.storyBoldMetaData}>{author.firstName+" "+author.lastName}</label> on <label className={Styles.storyBoldMetaData}>{formatDate(story.publishedDate)}</label></span>
                             {
-                            !!user.userId && author.userId && user.userId===author.userId &&
-                            <MenuDropdown list={settingTask} icon={"setting"} onClick={({name,path})=>this.onRoute(name,path,story.storyId)}/>
+                                !!user.userId && author.userId && user.userId===author.userId &&
+                                <MenuDropdown list={settingTask} icon={"setting"} onClick={({name,path})=>this.onRoute(name,path,story.storyId)}/>
                             }
                         </div>
                     </div>
@@ -84,7 +89,6 @@ class StoryContainer extends Component {
                         readMore && !!story.body===true && story.body.length>1000 &&  <TextButton text="Read More" onClick={()=>this.onRoute("story","/story",story.storyId)}/>
                     }
             </div>
-        </Transition>
         )
     }
 }
