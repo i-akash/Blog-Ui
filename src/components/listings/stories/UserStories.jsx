@@ -87,20 +87,19 @@ class UserStories extends Component {
   };
 
   onPageSizeChange = event => {
+    const pageSize = parseInt(event.target.value) | 0;
+    if (pageSize < 2) return;
+
     clearTimeout(this.timer);
-
     const { query, activePage } = this.state;
-
-    const currentPageSize = parseInt(event.target.value);
-    const { pageSize } = this.state;
     const prevPage = activePage - 1;
 
-    this.setState({ pageSize: currentPageSize });
+    this.setState({ pageSize });
 
     this.timer = setTimeout(() => {
       if (!!query == true)
-        this.requestStoriesQuery(prevPage * pageSize, currentPageSize, query);
-      else this.requestStories(prevPage * pageSize, currentPageSize);
+        this.requestStoriesQuery(prevPage * pageSize, pageSize, query);
+      else this.requestStories(prevPage * pageSize, pageSize);
     }, 1000);
   };
 
