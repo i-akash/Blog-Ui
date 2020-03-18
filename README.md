@@ -2,8 +2,7 @@
 
 ### Instruction
 
-- clone the project and go to the root folder
-
+- `git clone https://github.com/i-akash/Blog-Ui.git` 
+- go to root folder
 - `npm install`
-
 - `npm start`
