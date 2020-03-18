@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
     width: 100%;
     position: sticky;
     top: 0;
@@ -33,7 +33,7 @@
         padding-right: 5vw;
     }
 }
- 
+
 
 
 .listItem {
@@ -41,7 +41,7 @@
     font-weight: bold;
     font-size: 15px;
     text-transform: capitalize;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,12 +49,13 @@
     border-bottom: 1px solid black;
 }
 
-.listItemActive{
+.listItemActive {
     padding: 5px;
     font-weight: bold;
     font-size: 15px;
     color: var(--navbar-link-active-color);
     border-bottom: 2px solid var(--navbar-active-border-color);
+    text-transform: capitalize;
 
     display: flex;
     flex-direction: column;
@@ -62,14 +63,15 @@
     align-items: center;
 }
 
-.listHeader{
+.listHeader {
     font-size: 28px;
     color: var(--green-font-color) !important;
 }
 
-.listHeader:hover{
+.listHeader:hover {
     cursor: pointer;
 }
+
 .listItem:hover {
     color: var(--gray-font-color);
     cursor: pointer;
@@ -80,7 +82,6 @@
     margin: 5px;
 }
 
-.listItem:active{
+.listItem:active {
     color: var(--basic-font-color);
 }
-
