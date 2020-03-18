@@ -44,7 +44,6 @@ class Navbar extends Component {
   };
 
   onlogout = () => {
-    this.props.updateNavigation(-1);
     this.props.logout();
   };
 

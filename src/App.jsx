@@ -1,24 +1,25 @@
 //react comp
-import React from 'react';
+import React from "react";
 
 //components
-import Navbar from './components/navigation/navbar/Navbar'
-import AppRoute from './components/navigation/route/AppRoute'
-import Footer from './components/common/footer/Footer'
+import Navbar from "./components/navigation/navbar/Navbar";
+import AppRoute from "./components/navigation/route/AppRoute";
+import Footer from "./components/common/footer/Footer";
 //css
-import styles from './App.module.css';
+import styles from "./App.module.css";
 
-
-function App() {
-  return (
-    <div className={styles.appWindow}>
-        <Navbar/>
+class App extends React.Component {
+  render() {
+    return (
+      <div className={styles.appWindow}>
+        <Navbar />
         <div className={styles.container}>
-          <AppRoute/>
+          <AppRoute />
         </div>
-        <Footer/>
-    </div>
-  );
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;
