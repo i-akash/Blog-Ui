@@ -1,23 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Philosopher&display=swap');
+
 :root{
-  --yellow-green:#a8d500;
-  --gray:#888;
+  /* navbar */
+  --navbar-background-color:black;
+  --navbar-shadow:rgba(136, 136, 136, 0.137);
+  --navbar-link-color:#00CB54;
+  --navbar-link-active-color:gray;
+  --navbar-active-border-color:#00CB54;
+
+  
+
+  --yellow-green:#00CB54;
+
+  /* header */
+  --header-color:#00CB54;
+
+  /* form */
+  --form-bg-color:black;
+  --gray-font-color:#888;
+  --whites-font-color:rgba(245, 245, 245, 0.781);
+  --green-font-color:#00CB54;
+  --form-input-border-color:#00CB54;
+
+  /* global */
+  --black-bg-color:black;
+  --gray-focus-color:gray;
+
+  --green-border:#00CB54;
+  --gray-border:rgba(136, 136, 136, 0.24);
+  
   --white: #fff;
   --background:#282c34;
   --shadow: #4e4e4e5b;
-  --blue:#61dafb;
 }
 
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-display: swap;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 15px;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Philosopher', sans-serif !important;
+  font-display: swap;
+  color: var(--whites-font-color);
+}
+
+li{
+  font-display: swap;
+  font-family: 'Philosopher', sans-serif !important;
+}
+
+h3{
+  letter-spacing: 1.5px !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',monospace !important;
 }

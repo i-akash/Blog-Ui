@@ -1,0 +1,18 @@
+.ui.input{
+    margin-top:10px !important;
+    margin-bottom:10px !important;
+}
+.ui.icon.input>input{
+    background-color: var(--black-bg-color) !important;
+    box-shadow: 0px 0px 1rem 0px var(--gray-border) !important;
+    border: 1px solid var(--gray-border) !important;
+    color: var(--gray-font-color) !important;
+}
+
+.ui.icon.input>input:focus{
+    border-color: var(--gray-focus-color);
+}
+
+.ui.icon.input>i.circular.icon{
+    color: var(--green-font-color) !important;
+}

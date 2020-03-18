@@ -1,0 +1,5 @@
+.ui.fluid.placeholder {
+    background-color: var(--black-bg-color) !important;
+    padding: 2rem !important;
+    box-shadow: 2px 2px 1rem 1px var(--gray-border);
+}

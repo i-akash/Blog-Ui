@@ -1,0 +1,7 @@
+.customHeader{
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--header-color);
+    text-align: center;
+    margin-bottom: 3rem;
+}
