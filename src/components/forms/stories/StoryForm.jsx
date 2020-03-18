@@ -58,11 +58,13 @@ class StoryForm extends Component {
 
   onSubmit = event => {
     event.preventDefault();
+    this.setState({ loading: true });
+
     let { title, editorContent, date } = this.state;
     editorContent = pureHtml(editorContent);
     this.props
       .onSubmitStory({ title, body: editorContent, publishedDate: date })
-      .then(res => this.setState({ success: true }))
+      .then(res => this.setState({ loading: false, success: true }))
       .catch(err =>
         this.setState({ loading: false, formError: err.response.data.errors })
       );
