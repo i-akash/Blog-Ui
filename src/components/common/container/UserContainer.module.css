@@ -1,0 +1,9 @@
+.userContainer{
+    padding: 3rem;
+    margin-top:10px !important;
+    margin-bottom:10px !important;
+    border-radius: 2px;
+    border-bottom: 1px solid var(--gray-border);
+    box-shadow: 0px 0px 1rem 0px var(--gray-border);
+    overflow: hidden;
+}
