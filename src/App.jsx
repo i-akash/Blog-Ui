@@ -13,7 +13,7 @@ class App extends React.Component {
     return (
       <div className={styles.appWindow}>
         <Navbar />
-        <div className={styles.container}>
+        <div className={styles.appContainer}>
           <AppRoute />
         </div>
         <Footer />

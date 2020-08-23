@@ -26,10 +26,11 @@ class TinyEditor extends React.Component {
           <Editor
             onNodeChange={()=>this.setState({loading:false})}
             initialValue="<p>This is the initial content of the editor</p>"
+           
             init={{
               height: 500,
               menubar: false,
-              
+                 
               plugins: [
                 'preview',
                 'insertdatetime paste wordcount'

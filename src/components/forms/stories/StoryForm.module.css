@@ -9,24 +9,27 @@
     box-shadow: 2px 2px 1rem 1px var(--gray-border);
     border-radius: 5px;
 
-    width: 60vw;
+    width: 100%
 }
 
+.appForm{
+    width: 80%   
+}
 
 @media only screen and (max-width: 1370px) {
-    .formContainer{
-        width: 70vw;
+    .appForm{
+        width: 85%;
     }
 }
 
   @media only screen and (max-width: 1200px) {
-    .formContainer{
-        width: 75vw;
+    .appForm{
+        width: 90%;
     }
 }
 
 @media only screen and (max-width: 1000px) {
-    .formContainer{
-        width: 100vw;
+    .appForm{
+        width: 100%;
     }
 }

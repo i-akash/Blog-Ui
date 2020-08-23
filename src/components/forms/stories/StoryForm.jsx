@@ -88,7 +88,7 @@ class StoryForm extends Component {
 
     return (
       <div className={Styles.formContainer}>
-        <Form loading={loading} onSubmit={this.onSubmit}>
+        <Form className={Styles.appForm} loading={loading} onSubmit={this.onSubmit}>
           <Header header={header} />
 
           <Alert
@@ -130,22 +130,23 @@ class StoryForm extends Component {
             onContentChange={this.onContentChange}
             content={editorContent}
           />
-          <DateInput
-            animation="zoom"
-            duration={0}
-            name="date"
-            placeholder="Date"
-            value={formatDate(date)}
-            iconPosition="left"
-            onChange={this.onDateChange}
-            dateFormat="YYYY-MM-DD"
-            error={
-              !!formError.PublishedDate && {
-                content: formError.PublishedDate[0],
-                pointing: "below"
+          
+            <DateInput
+              animation="zoom"
+              duration={0}
+              name="date"
+              placeholder="Date"
+              value={formatDate(date)}
+              iconPosition="left"
+              onChange={this.onDateChange}
+              dateFormat="YYYY-MM-DD"
+              error={
+                !!formError.PublishedDate && {
+                  content: formError.PublishedDate[0],
+                  pointing: "below"
+                }
               }
-            }
-          />
+            />
           <Button text={btnText} />
         </Form>
       </div>

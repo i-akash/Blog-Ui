@@ -48,7 +48,7 @@ class StoryContainer extends Component {
 
   preprocessContent = (storyBody = "", readMore = true) => {
     let content = storyBody;
-    if (readMore && content.length > 995) return content.substring(0, 995);
+    if (readMore && content.length > 1100) return content.substring(0, 1100);
     else return content;
   };
 
